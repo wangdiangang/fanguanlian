@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style>
+    .box{
+        display: flex;
+        margin-top: 40px;
+        justify-content: space-between;
+    }
+
+    .box .span{
+        display: block;
+        width: 300px;
+    }
+    .excelFile{
+        width: 200px;
+    }
+    .el-input{
+        width: 100px;
+    }
+    .el-select{
+        width: 100px;
+        margin-left: 20px;
+    }
+    .el-select .el-input{
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div id="app">
+
+    <div class="box">
+        <span class="span">路径</span>
+        <span>文件</span>
+        <span>反关联之前的列</span>
+        <span>路径映射</span>
+        <span>前端请求映射</span>
+        <span>后端返回映射</span>
+    </div>
+    <div class="box">
+              <span class="span">路径上传</span>
+                <input ref="files" type="file" class="excelFile" @change="jiekou" />
+                <el-input v-model="value1" placeholder="反关联前列数"></el-input>
+                <el-select v-model="value2" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                  <el-select v-model="value4" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                  <el-select v-model="value6" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+            </div>
+            <!-- <div class="box">
+                <span class="span">前端请求上传</span>
+            <input ref="files" type="file" class="excelFile" @change="jiekou1" />
+
+            <el-input v-model="value3" placeholder="反关联前列数"></el-input>
+            <el-select v-model="value4" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+        </div>
+        <div class="box">
+         <span class="span">后端接受上传</span>
+        <input ref="files" type="file" class="excelFile" @change="jiekou2" />
+        <el-input v-model="value5" placeholder="反关联前列数"></el-input>
+        <el-select v-model="value6" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+    </div> -->
+    </div>
+</body>
+<!-- import Vue before Element -->
+
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script type="text/javascript" src="./xlsx.core.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                value1:3,
+                value2:0,
+                value3:1,
+                value4:0,
+                value5:1,
+                value6:0,
+                options:[ {"label": "A","value": 0},{"label": "B","value": 1},{"label": "C","value": 2},{"label": "D","value": 3},{"label": "E","value": 4},{"label": "F","value": 5},{"label": "G","value": 6},{"label": "H","value": 7},{"label": "I","value": 8},{"label": "J","value": 9},{"label": "K","value": 10},{"label": "L","value": 11},{"label": "M","value": 12},{"label": "N","value": 13},{"label": "O","value": 14},{"label": "P","value": 15},{"label": "Q","value": 16},{"label": "R","value": 17},{"label": "S","value": 18},{"label": "T","value": 19},{"label": "U","value": 20},{"label": "V","value": 21},{"label": "W","value": 22},{"label": "X","value": 23},{"label": "Y","value": 24},{"label": "Z","value": 25}]
+             }
+        },
+        methods: {
+            jiekou(file){
+                console.log(file,1111);
+                this.excelFileMethod(file,'0')
+            },
+            jiekou1(file){
+                console.log(file,222);
+                this.excelFileMethod(file,'1')
+            },
+            jiekou2(file){
+                console.log(file,333);
+                this.excelFileMethod(file,'2')
+            },
+            // 处理excel文件
+            excelFileMethod(e,t) {
+                // 导入状态和文件信息
+                // 反关联文件只留下  反关联路径映射--前端请求字段映射=-后端返回字段映射--这三个sheet
+                var _this = this
+                const excelFile = e.target.files
+                const fileReader = new FileReader()
+                fileReader.onload = function (ev) {
+                    const data = ev.target.result
+                    const workbook = XLSX.read(data, { type: 'binary' })
+
+                    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const worksheet1 = workbook.Sheets[workbook.SheetNames[1]];
+                    const worksheet2 = workbook.Sheets[workbook.SheetNames[2]];
+                    console.log('workbook', workbook);
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    const jsonData1 = XLSX.utils.sheet_to_json(worksheet1, { header: 1 });
+                    const jsonData2 = XLSX.utils.sheet_to_json(worksheet2, { header: 1 });
+                    console.log('jsonData', jsonData);
+                    // if(t=='0'){
+                          each(jsonData,_this.value2)//接口映射
+                    // }else if(t=='1'){
+                          eachreq(jsonData1,_this.value4)//前端字段映射
+                    // }else{
+                         eachres(jsonData2,_this.value6)//后端字段映射
+                    // }
+                   
+                  
+                   
+                }
+                // 读取数据
+                fileReader.readAsBinaryString(excelFile[0]);
+            }
+        }
+    })
+</script>
+
+</html>
+
+<script>
+    let each=(list,num)=>{
+        let obj={}
+        console.log(num);
+        list.forEach(item => {
+            let inm=item[11]//改这个数字
+            if(num){
+                obj[item[3]]=item[num]
+            }
+        });
+        console.log('路径映射',obj);
+    }
+   
+
+
+
+    
+    // --------------------req.js-start-------------------
+    let eachreq=(list,num)=>{
+        let obj = {}
+    list.forEach(item => {
+        let key1 = item[1]
+        let key3 = item[3]
+
+        let list=['token','packageName','userId','appVersion']
+        if (!obj[key1]) {
+            let o = {}
+            if(!list.includes(key3)){
+                o[key3] = item[num]
+               
+            }
+            obj[key1] = o
+            
+        } else {
+            if(!list.includes(key3)){
+                obj[key1][key3] = item[num]
+            }
+           
+        }
+    });
+    console.log('请求objREQ', obj);
+    }
+    
+    // -=-------------------req.js-end-------------------
+    // --------------------res.js-start-------------------
+    let eachres=(list,num)=>{
+       let obj = {}
+    list.forEach(item => {
+
+        let key1 = item[1]//url
+        let key3 = item[3]//原始字段
+            let list=['retMsg','retCode']
+            if(!list.includes(key3)){
+        if (!obj[key1]) {
+            obj[key1]={} 
+                obj[key1][item[num]] = key3
+           
+        } else {
+                obj[key1][item[num]] = key3
+           
+        }
+            }
+        
+    });
+    console.log('接收vobjres', obj); 
+    }
+    
+</script>
