@@ -146,8 +146,8 @@
                     const workbook = XLSX.read(data, { type: 'binary' })
 
                     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const worksheet1 = workbook.Sheets[workbook.SheetNames[1]];
-                    const worksheet2 = workbook.Sheets[workbook.SheetNames[2]];
+                    const worksheet1 = workbook.Sheets[workbook.SheetNames[0]];
+                    const worksheet2 = workbook.Sheets[workbook.SheetNames[0]];
                     console.log('workbook', workbook);
                     const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
                     const jsonData1 = XLSX.utils.sheet_to_json(worksheet1, { header: 1 });
@@ -192,6 +192,7 @@
     
     // --------------------req.js-start-------------------
     let eachreq=(list,num)=>{
+        console.log('eachreq',list,num);
         let obj = {}
     list.forEach(item => {
         let key1 = item[1]
