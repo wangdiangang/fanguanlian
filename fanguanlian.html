@@ -7,27 +7,35 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <style>
-    .box{
+    #app {
+        padding: 30px 200px;
+    }
+
+    .box {
         display: flex;
         margin-top: 40px;
         justify-content: space-between;
     }
 
-    .box .span{
+    .box .span {
         display: block;
         width: 300px;
     }
-    .excelFile{
+
+    .excelFile {
         width: 200px;
     }
-    .el-input{
+
+    .el-input {
         width: 100px;
     }
-    .el-select{
+
+    .el-select {
         width: 100px;
         margin-left: 20px;
     }
-    .el-select .el-input{
+
+    .el-select .el-input {
         width: 100%;
     }
 </style>
@@ -35,70 +43,43 @@
 <body>
     <div id="app">
 
-    <div class="box">
-        <span class="span">路径</span>
-        <span>文件</span>
-        <span>反关联之前的列</span>
-        <span>路径映射</span>
-        <span>前端请求映射</span>
-        <span>后端返回映射</span>
-    </div>
-    <div class="box">
-              <span class="span">路径上传</span>
-                <input ref="files" type="file" class="excelFile" @change="jiekou" />
-                <el-input v-model="value1" placeholder="反关联前列数"></el-input>
-                <el-select v-model="value2" placeholder="请选择">
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                  <el-select v-model="value4" placeholder="请选择">
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                  <el-select v-model="value6" placeholder="请选择">
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-            </div>
-            <!-- <div class="box">
-                <span class="span">前端请求上传</span>
-            <input ref="files" type="file" class="excelFile" @change="jiekou1" />
-
-            <el-input v-model="value3" placeholder="反关联前列数"></el-input>
-            <el-select v-model="value4" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
+        <div class="box">
+            <span class="span">路径</span>
+            <span>文件</span>
+            <span>反关联之前的列</span>
+            <span>映射列</span>
         </div>
         <div class="box">
-         <span class="span">后端接受上传</span>
-        <input ref="files" type="file" class="excelFile" @change="jiekou2" />
-        <el-input v-model="value5" placeholder="反关联前列数"></el-input>
-        <el-select v-model="value6" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-    </div> -->
+            <span class="span">路径上传</span>
+            <input ref="files" type="file" class="excelFile" @change="jiekou" />
+            <el-input v-model="value1" placeholder="反关联前列数"></el-input>
+            <el-select v-model="value2" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </div>
+        <div class="box">
+            <span class="span">前端req上传</span>
+            <input ref="files" type="file" class="excelFile" @change="jiekou1" />
+            <el-input v-model="value11" placeholder="反关联前列数"></el-input>
+
+            <el-select v-model="value4" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+
+        </div>
+        <div class="box">
+            <span class="span">后端res上传</span>
+            <input ref="files" type="file" class="excelFile" @change="jiekou2" />
+            <el-input v-model="value11" placeholder="反关联前列数"></el-input>
+
+            <el-select v-model="value6" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </div>
+
     </div>
 </body>
 <!-- import Vue before Element -->
@@ -112,30 +93,832 @@
         el: '#app',
         data: function () {
             return {
-                value1:3,
-                value2:0,
-                value3:1,
-                value4:0,
-                value5:1,
-                value6:0,
-                options:[ {"label": "A","value": 0},{"label": "B","value": 1},{"label": "C","value": 2},{"label": "D","value": 3},{"label": "E","value": 4},{"label": "F","value": 5},{"label": "G","value": 6},{"label": "H","value": 7},{"label": "I","value": 8},{"label": "J","value": 9},{"label": "K","value": 10},{"label": "L","value": 11},{"label": "M","value": 12},{"label": "N","value": 13},{"label": "O","value": 14},{"label": "P","value": 15},{"label": "Q","value": 16},{"label": "R","value": 17},{"label": "S","value": 18},{"label": "T","value": 19},{"label": "U","value": 20},{"label": "V","value": 21},{"label": "W","value": 22},{"label": "X","value": 23},{"label": "Y","value": 24},{"label": "Z","value": 25}]
-             }
+                value1: 3,
+                value11: 1,
+                value2: 0,
+                value3: 1,
+                value4: 0,
+                value5: 1,
+                value6: 0,
+                options: [
+                    {
+                        "label": "A",
+                        "value": 0
+                    },
+                    {
+                        "label": "B",
+                        "value": 1
+                    },
+                    {
+                        "label": "C",
+                        "value": 2
+                    },
+                    {
+                        "label": "D",
+                        "value": 3
+                    },
+                    {
+                        "label": "E",
+                        "value": 4
+                    },
+                    {
+                        "label": "F",
+                        "value": 5
+                    },
+                    {
+                        "label": "G",
+                        "value": 6
+                    },
+                    {
+                        "label": "H",
+                        "value": 7
+                    },
+                    {
+                        "label": "I",
+                        "value": 8
+                    },
+                    {
+                        "label": "J",
+                        "value": 9
+                    },
+                    {
+                        "label": "K",
+                        "value": 10
+                    },
+                    {
+                        "label": "L",
+                        "value": 11
+                    },
+                    {
+                        "label": "M",
+                        "value": 12
+                    },
+                    {
+                        "label": "N",
+                        "value": 13
+                    },
+                    {
+                        "label": "O",
+                        "value": 14
+                    },
+                    {
+                        "label": "P",
+                        "value": 15
+                    },
+                    {
+                        "label": "Q",
+                        "value": 16
+                    },
+                    {
+                        "label": "R",
+                        "value": 17
+                    },
+                    {
+                        "label": "S",
+                        "value": 18
+                    },
+                    {
+                        "label": "T",
+                        "value": 19
+                    },
+                    {
+                        "label": "U",
+                        "value": 20
+                    },
+                    {
+                        "label": "V",
+                        "value": 21
+                    },
+                    {
+                        "label": "W",
+                        "value": 22
+                    },
+                    {
+                        "label": "X",
+                        "value": 23
+                    },
+                    {
+                        "label": "Y",
+                        "value": 24
+                    },
+                    {
+                        "label": "Z",
+                        "value": 25
+                    },
+                    {
+                        "label": "AA",
+                        "value": 26
+                    },
+                    {
+                        "label": "AB",
+                        "value": 27
+                    },
+                    {
+                        "label": "AC",
+                        "value": 28
+                    },
+                    {
+                        "label": "AD",
+                        "value": 29
+                    },
+                    {
+                        "label": "AE",
+                        "value": 30
+                    },
+                    {
+                        "label": "AF",
+                        "value": 31
+                    },
+                    {
+                        "label": "AG",
+                        "value": 32
+                    },
+                    {
+                        "label": "AH",
+                        "value": 33
+                    },
+                    {
+                        "label": "AI",
+                        "value": 34
+                    },
+                    {
+                        "label": "AJ",
+                        "value": 35
+                    },
+                    {
+                        "label": "AK",
+                        "value": 36
+                    },
+                    {
+                        "label": "AL",
+                        "value": 37
+                    },
+                    {
+                        "label": "AM",
+                        "value": 38
+                    },
+                    {
+                        "label": "AN",
+                        "value": 39
+                    },
+                    {
+                        "label": "AO",
+                        "value": 40
+                    },
+                    {
+                        "label": "AP",
+                        "value": 41
+                    },
+                    {
+                        "label": "AQ",
+                        "value": 42
+                    },
+                    {
+                        "label": "AR",
+                        "value": 43
+                    },
+                    {
+                        "label": "AS",
+                        "value": 44
+                    },
+                    {
+                        "label": "AT",
+                        "value": 45
+                    },
+                    {
+                        "label": "AU",
+                        "value": 46
+                    },
+                    {
+                        "label": "AV",
+                        "value": 47
+                    },
+                    {
+                        "label": "AW",
+                        "value": 48
+                    },
+                    {
+                        "label": "AX",
+                        "value": 49
+                    },
+                    {
+                        "label": "AY",
+                        "value": 50
+                    },
+                    {
+                        "label": "AZ",
+                        "value": 51
+                    },
+                    {
+                        "label": "BA",
+                        "value": 52
+                    },
+                    {
+                        "label": "BB",
+                        "value": 53
+                    },
+                    {
+                        "label": "BC",
+                        "value": 54
+                    },
+                    {
+                        "label": "BD",
+                        "value": 55
+                    },
+                    {
+                        "label": "BE",
+                        "value": 56
+                    },
+                    {
+                        "label": "BF",
+                        "value": 57
+                    },
+                    {
+                        "label": "BG",
+                        "value": 58
+                    },
+                    {
+                        "label": "BH",
+                        "value": 59
+                    },
+                    {
+                        "label": "BI",
+                        "value": 60
+                    },
+                    {
+                        "label": "BJ",
+                        "value": 61
+                    },
+                    {
+                        "label": "BK",
+                        "value": 62
+                    },
+                    {
+                        "label": "BL",
+                        "value": 63
+                    },
+                    {
+                        "label": "BM",
+                        "value": 64
+                    },
+                    {
+                        "label": "BN",
+                        "value": 65
+                    },
+                    {
+                        "label": "BO",
+                        "value": 66
+                    },
+                    {
+                        "label": "BP",
+                        "value": 67
+                    },
+                    {
+                        "label": "BQ",
+                        "value": 68
+                    },
+                    {
+                        "label": "BR",
+                        "value": 69
+                    },
+                    {
+                        "label": "BS",
+                        "value": 70
+                    },
+                    {
+                        "label": "BT",
+                        "value": 71
+                    },
+                    {
+                        "label": "BU",
+                        "value": 72
+                    },
+                    {
+                        "label": "BV",
+                        "value": 73
+                    },
+                    {
+                        "label": "BW",
+                        "value": 74
+                    },
+                    {
+                        "label": "BX",
+                        "value": 75
+                    },
+                    {
+                        "label": "BY",
+                        "value": 76
+                    },
+                    {
+                        "label": "BZ",
+                        "value": 77
+                    },
+                    {
+                        "label": "CA",
+                        "value": 78
+                    },
+                    {
+                        "label": "CB",
+                        "value": 79
+                    },
+                    {
+                        "label": "CC",
+                        "value": 80
+                    },
+                    {
+                        "label": "CD",
+                        "value": 81
+                    },
+                    {
+                        "label": "CE",
+                        "value": 82
+                    },
+                    {
+                        "label": "CF",
+                        "value": 83
+                    },
+                    {
+                        "label": "CG",
+                        "value": 84
+                    },
+                    {
+                        "label": "CH",
+                        "value": 85
+                    },
+                    {
+                        "label": "CI",
+                        "value": 86
+                    },
+                    {
+                        "label": "CJ",
+                        "value": 87
+                    },
+                    {
+                        "label": "CK",
+                        "value": 88
+                    },
+                    {
+                        "label": "CL",
+                        "value": 89
+                    },
+                    {
+                        "label": "CM",
+                        "value": 90
+                    },
+                    {
+                        "label": "CN",
+                        "value": 91
+                    },
+                    {
+                        "label": "CO",
+                        "value": 92
+                    },
+                    {
+                        "label": "CP",
+                        "value": 93
+                    },
+                    {
+                        "label": "CQ",
+                        "value": 94
+                    },
+                    {
+                        "label": "CR",
+                        "value": 95
+                    },
+                    {
+                        "label": "CS",
+                        "value": 96
+                    },
+                    {
+                        "label": "CT",
+                        "value": 97
+                    },
+                    {
+                        "label": "CU",
+                        "value": 98
+                    },
+                    {
+                        "label": "CV",
+                        "value": 99
+                    },
+                    {
+                        "label": "CW",
+                        "value": 100
+                    },
+                    {
+                        "label": "CX",
+                        "value": 101
+                    },
+                    {
+                        "label": "CY",
+                        "value": 102
+                    },
+                    {
+                        "label": "CZ",
+                        "value": 103
+                    },
+                    {
+                        "label": "DA",
+                        "value": 104
+                    },
+                    {
+                        "label": "DB",
+                        "value": 105
+                    },
+                    {
+                        "label": "DC",
+                        "value": 106
+                    },
+                    {
+                        "label": "DD",
+                        "value": 107
+                    },
+                    {
+                        "label": "DE",
+                        "value": 108
+                    },
+                    {
+                        "label": "DF",
+                        "value": 109
+                    },
+                    {
+                        "label": "DG",
+                        "value": 110
+                    },
+                    {
+                        "label": "DH",
+                        "value": 111
+                    },
+                    {
+                        "label": "DI",
+                        "value": 112
+                    },
+                    {
+                        "label": "DJ",
+                        "value": 113
+                    },
+                    {
+                        "label": "DK",
+                        "value": 114
+                    },
+                    {
+                        "label": "DL",
+                        "value": 115
+                    },
+                    {
+                        "label": "DM",
+                        "value": 116
+                    },
+                    {
+                        "label": "DN",
+                        "value": 117
+                    },
+                    {
+                        "label": "DO",
+                        "value": 118
+                    },
+                    {
+                        "label": "DP",
+                        "value": 119
+                    },
+                    {
+                        "label": "DQ",
+                        "value": 120
+                    },
+                    {
+                        "label": "DR",
+                        "value": 121
+                    },
+                    {
+                        "label": "DS",
+                        "value": 122
+                    },
+                    {
+                        "label": "DT",
+                        "value": 123
+                    },
+                    {
+                        "label": "DU",
+                        "value": 124
+                    },
+                    {
+                        "label": "DV",
+                        "value": 125
+                    },
+                    {
+                        "label": "DW",
+                        "value": 126
+                    },
+                    {
+                        "label": "DX",
+                        "value": 127
+                    },
+                    {
+                        "label": "DY",
+                        "value": 128
+                    },
+                    {
+                        "label": "DZ",
+                        "value": 129
+                    },
+                    {
+                        "label": "EA",
+                        "value": 130
+                    },
+                    {
+                        "label": "EB",
+                        "value": 131
+                    },
+                    {
+                        "label": "EC",
+                        "value": 132
+                    },
+                    {
+                        "label": "ED",
+                        "value": 133
+                    },
+                    {
+                        "label": "EE",
+                        "value": 134
+                    },
+                    {
+                        "label": "EF",
+                        "value": 135
+                    },
+                    {
+                        "label": "EG",
+                        "value": 136
+                    },
+                    {
+                        "label": "EH",
+                        "value": 137
+                    },
+                    {
+                        "label": "EI",
+                        "value": 138
+                    },
+                    {
+                        "label": "EJ",
+                        "value": 139
+                    },
+                    {
+                        "label": "EK",
+                        "value": 140
+                    },
+                    {
+                        "label": "EL",
+                        "value": 141
+                    },
+                    {
+                        "label": "EM",
+                        "value": 142
+                    },
+                    {
+                        "label": "EN",
+                        "value": 143
+                    },
+                    {
+                        "label": "EO",
+                        "value": 144
+                    },
+                    {
+                        "label": "EP",
+                        "value": 145
+                    },
+                    {
+                        "label": "EQ",
+                        "value": 146
+                    },
+                    {
+                        "label": "ER",
+                        "value": 147
+                    },
+                    {
+                        "label": "ES",
+                        "value": 148
+                    },
+                    {
+                        "label": "ET",
+                        "value": 149
+                    },
+                    {
+                        "label": "EU",
+                        "value": 150
+                    },
+                    {
+                        "label": "EV",
+                        "value": 151
+                    },
+                    {
+                        "label": "EW",
+                        "value": 152
+                    },
+                    {
+                        "label": "EX",
+                        "value": 153
+                    },
+                    {
+                        "label": "EY",
+                        "value": 154
+                    },
+                    {
+                        "label": "EZ",
+                        "value": 155
+                    },
+                    {
+                        "label": "FA",
+                        "value": 156
+                    },
+                    {
+                        "label": "FB",
+                        "value": 157
+                    },
+                    {
+                        "label": "FC",
+                        "value": 158
+                    },
+                    {
+                        "label": "FD",
+                        "value": 159
+                    },
+                    {
+                        "label": "FE",
+                        "value": 160
+                    },
+                    {
+                        "label": "FF",
+                        "value": 161
+                    },
+                    {
+                        "label": "FG",
+                        "value": 162
+                    },
+                    {
+                        "label": "FH",
+                        "value": 163
+                    },
+                    {
+                        "label": "FI",
+                        "value": 164
+                    },
+                    {
+                        "label": "FJ",
+                        "value": 165
+                    },
+                    {
+                        "label": "FK",
+                        "value": 166
+                    },
+                    {
+                        "label": "FL",
+                        "value": 167
+                    },
+                    {
+                        "label": "FM",
+                        "value": 168
+                    },
+                    {
+                        "label": "FN",
+                        "value": 169
+                    },
+                    {
+                        "label": "FO",
+                        "value": 170
+                    },
+                    {
+                        "label": "FP",
+                        "value": 171
+                    },
+                    {
+                        "label": "FQ",
+                        "value": 172
+                    },
+                    {
+                        "label": "FR",
+                        "value": 173
+                    },
+                    {
+                        "label": "FS",
+                        "value": 174
+                    },
+                    {
+                        "label": "FT",
+                        "value": 175
+                    },
+                    {
+                        "label": "FU",
+                        "value": 176
+                    },
+                    {
+                        "label": "FV",
+                        "value": 177
+                    },
+                    {
+                        "label": "FW",
+                        "value": 178
+                    },
+                    {
+                        "label": "FX",
+                        "value": 179
+                    },
+                    {
+                        "label": "FY",
+                        "value": 180
+                    },
+                    {
+                        "label": "FZ",
+                        "value": 181
+                    },
+                    {
+                        "label": "GA",
+                        "value": 182
+                    },
+                    {
+                        "label": "GB",
+                        "value": 183
+                    },
+                    {
+                        "label": "GC",
+                        "value": 184
+                    },
+                    {
+                        "label": "GD",
+                        "value": 185
+                    },
+                    {
+                        "label": "GE",
+                        "value": 186
+                    },
+                    {
+                        "label": "GF",
+                        "value": 187
+                    },
+                    {
+                        "label": "GG",
+                        "value": 188
+                    },
+                    {
+                        "label": "GH",
+                        "value": 189
+                    },
+                    {
+                        "label": "GI",
+                        "value": 190
+                    },
+                    {
+                        "label": "GJ",
+                        "value": 191
+                    },
+                    {
+                        "label": "GK",
+                        "value": 192
+                    },
+                    {
+                        "label": "GL",
+                        "value": 193
+                    },
+                    {
+                        "label": "GM",
+                        "value": 194
+                    },
+                    {
+                        "label": "GN",
+                        "value": 195
+                    },
+                    {
+                        "label": "GO",
+                        "value": 196
+                    },
+                    {
+                        "label": "GP",
+                        "value": 197
+                    },
+                    {
+                        "label": "GQ",
+                        "value": 198
+                    },
+                    {
+                        "label": "GR",
+                        "value": 199
+                    }
+                ]
+            }
         },
         methods: {
-            jiekou(file){
-                console.log(file,1111);
-                this.excelFileMethod(file,'0')
+            jiekou(file) {
+                console.log(file, 1111);
+                this.excelFileMethod(file, '0')
             },
-            jiekou1(file){
-                console.log(file,222);
-                this.excelFileMethod(file,'1')
+            jiekou1(file) {
+                console.log(file, 222);
+                this.excelFileMethod(file, '1')
             },
-            jiekou2(file){
-                console.log(file,333);
-                this.excelFileMethod(file,'2')
+            jiekou2(file) {
+                console.log(file, 333);
+                this.excelFileMethod(file, '2')
             },
             // 处理excel文件
-            excelFileMethod(e,t) {
+            excelFileMethod(e, t) {
                 // 导入状态和文件信息
                 // 反关联文件只留下  反关联路径映射--前端请求字段映射=-后端返回字段映射--这三个sheet
                 var _this = this
@@ -148,21 +931,20 @@
                     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
                     const worksheet1 = workbook.Sheets[workbook.SheetNames[0]];
                     const worksheet2 = workbook.Sheets[workbook.SheetNames[0]];
-                    console.log('workbook', workbook);
                     const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
                     const jsonData1 = XLSX.utils.sheet_to_json(worksheet1, { header: 1 });
                     const jsonData2 = XLSX.utils.sheet_to_json(worksheet2, { header: 1 });
-                    console.log('jsonData', jsonData);
-                    // if(t=='0'){
-                          each(jsonData,_this.value2)//接口映射
-                    // }else if(t=='1'){
-                          eachreq(jsonData1,_this.value4)//前端字段映射
-                    // }else{
-                         eachres(jsonData2,_this.value6)//后端字段映射
-                    // }
-                   
-                  
-                   
+                    // console.log('jsonData', jsonData);
+                    if (t == '0') {
+                        each(jsonData, _this.value2)//接口映射
+                    } else if (t == '1') {
+                        eachreq(jsonData1, _this.value4)//前端字段映射
+                    } else {
+                        eachres(jsonData2, _this.value6)//后端字段映射
+                    }
+
+
+
                 }
                 // 读取数据
                 fileReader.readAsBinaryString(excelFile[0]);
@@ -174,71 +956,107 @@
 </html>
 
 <script>
-    let each=(list,num)=>{
-        let obj={}
+    let each = (list, num) => {
+        let obj = {}
         console.log(num);
         list.forEach(item => {
-            let inm=item[11]//改这个数字
-            if(num){
-                obj[item[3]]=item[num]
+            let inm = item[11]//改这个数字
+            if (num) {
+                obj[item[3]] = item[num]
             }
         });
-        console.log('路径映射',obj);
+        console.log('路径映射', obj);
     }
-   
 
 
 
-    
+
+
     // --------------------req.js-start-------------------
-    let eachreq=(list,num)=>{
-        console.log('eachreq',list,num);
+    let eachreq = (list, num) => {
+        console.log('eachreq', list, num);
         let obj = {}
-    list.forEach(item => {
-        let key1 = item[1]
-        let key3 = item[3]
+        list.forEach(item => {
+            let key1 = item[1]
+            let key3 = item[3]
 
-        let list=['token','packageName','userId','appVersion']
-        if (!obj[key1]) {
-            let o = {}
-            if(!list.includes(key3)){
-                o[key3] = item[num]
-               
+            let list = ['token', 'packageName', 'userId', 'appVersion']
+            if (!obj[key1]) {
+                let o = {}
+                if (!list.includes(key3)) {
+                    o[key3] = item[num]
+
+                }
+                obj[key1] = o
+
+            } else {
+                if (!list.includes(key3)) {
+                    obj[key1][key3] = item[num]
+                }
+
             }
-            obj[key1] = o
-            
-        } else {
-            if(!list.includes(key3)){
-                obj[key1][key3] = item[num]
-            }
-           
-        }
-    });
-    console.log('请求objREQ', obj);
+        });
+        console.log('请求objREQ', obj);
     }
-    
+
     // -=-------------------req.js-end-------------------
     // --------------------res.js-start-------------------
-    let eachres=(list,num)=>{
-       let obj = {}
-    list.forEach(item => {
+    let eachres = (list, num) => {
+        let obj = {}
+        list.forEach(item => {
 
-        let key1 = item[1]//url
-        let key3 = item[3]//原始字段
-            let list=['retMsg','retCode']
-            if(!list.includes(key3)){
-        if (!obj[key1]) {
-            obj[key1]={} 
-                obj[key1][item[num]] = key3
-           
-        } else {
-                obj[key1][item[num]] = key3
-           
-        }
+            let key1 = item[1]//url
+            let key3 = item[3]//原始字段
+            let list = ['retMsg', 'retCode']
+            if (!list.includes(key3)) {
+                if (!obj[key1]) {
+                    obj[key1] = {}
+                    obj[key1][item[num]] = key3
+
+                } else {
+                    obj[key1][item[num]] = key3
+
+                }
             }
-        
-    });
-    console.log('接收vobjres', obj); 
+
+        });
+        console.log('接收vobjres', obj);
     }
-    
+
 </script>
+
+<!-- <script>
+
+function generateExcelColumnOptions(count) {  
+    const options = [];  
+    let column = 'A';  
+    let value = 0;  
+  
+    while (options.length < count) {  
+        options.push({ label: column, value: value });  
+        value++;  
+  
+        // 计算下一个列名  
+        column = getNextColumnName(column);  
+    }  
+  
+    return options;  
+}  
+  
+function getNextColumnName(current) {  
+    if (current.length === 0) return 'A'; // 初始情况  
+  
+    const lastIndex = current.charCodeAt(current.length - 1) - 'A'.charCodeAt(0);  
+    if (lastIndex < 25) {  
+        // 当前字符不是Z，直接增加  
+        return current.slice(0, -1) + String.fromCharCode('A'.charCodeAt(0) + lastIndex + 1);  
+    } else {  
+        // 当前字符是Z，回滚到前一个字符并增加新的A  
+        return getNextColumnName(current.slice(0, -1)) + 'A';  
+    }  
+}  
+  
+// 调用函数生成两百个选项  
+const excelColumnOptions = generateExcelColumnOptions(200);  
+console.log(excelColumnOptions);
+</script> -->
